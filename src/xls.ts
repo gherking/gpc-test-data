@@ -5,7 +5,10 @@ import { readFile, utils } from "xlsx";
 import * as csv from "./csv";
 
 export const TAG = 'load_xls';
-export const tag = (path: string): Tag => new Tag(TAG, path);
+export const tag = (path: string, sheet?: string | number): Tag => new Tag(
+  TAG,
+  typeof sheet === "undefined" ? path : `${path},${sheet}`
+);
 export const isTag = (tag: Tag): boolean => !!tag && tag.name.toLowerCase() === TAG;
 
 export function load(path: string, sheet?: string | number): unknown[] {

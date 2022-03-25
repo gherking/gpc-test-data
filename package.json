@@ -1,6 +1,6 @@
 {
   "name": "gpc-test-data",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This precompiler inserts external test data as example rows.",
   "main": "index.js",
   "types": "index.d.ts",

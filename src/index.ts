@@ -89,7 +89,10 @@ export default class TestData implements PreCompiler {
         throw new EmptyDataError(`Data is empty: ${loadTags[0]}!`);
       }
       const preparedData = this.prepareData(rawData);
-      const headers = e.header.cells.map(cell => this.config.ignoreKeyCase ? cell.value.toLowerCase() : cell.value);
+      const headers = e.header.cells.map(cell => {
+        return this.config.ignoreKeyCase ? cell.value.toLowerCase() : cell.value;
+      });
+      const body: TableRow[] = this.config.appendData ? e.body : [];
       for (const data of preparedData) {
         const row = new TableRow();
         for (const h of headers) {
@@ -99,8 +102,9 @@ export default class TestData implements PreCompiler {
             row.cells.push(new TableCell(String(this.config.defaultValue)));
           }
         }
-        e.body.push(row);
+        body.push(row);
       }
+      e.body = body;
     }
   }
 }
