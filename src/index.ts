@@ -19,6 +19,7 @@ export default class TestData implements PreCompiler {
 
   constructor(config?: Partial<Config>) {
     debug("Intialize");
+    /* istanbul ignore next */
     this.config = {
       ...DEFAULT_CONFIG,
       ...(config || {}),
