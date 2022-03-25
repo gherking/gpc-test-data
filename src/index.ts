@@ -1,7 +1,7 @@
 import { PreCompiler } from "gherking";
 import { /* TODO */ } from "gherkin-ast";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require("debug")("gpc:template");
+const debug = require("debug")("gpc:test-data");
 
 // TODO: define your configuration option, if necessary
 export interface Config {
@@ -14,7 +14,7 @@ const DEFAULT_CONFIG: Config = {
 };
 
 // TODO: Add implementation of your precompiler
-export default class Template implements PreCompiler {
+export default class TestData implements PreCompiler {
   private config: Config;
 
   constructor(config?: Partial<Config>) {

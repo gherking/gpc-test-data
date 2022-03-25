@@ -1,6 +1,8 @@
-# gpc-template
+> **IMPORTANT** This is a placeholder version of the package, please wait until **v1.0.0** is released.
 
-![Downloads](https://img.shields.io/npm/dw/gpc-template?style=flat-square) ![Version@npm](https://img.shields.io/npm/v/gpc-template?label=version%40npm&style=flat-square) ![Version@git](https://img.shields.io/github/package-json/v/gherking/gpc-template/master?label=version%40git&style=flat-square) ![CI](https://img.shields.io/github/workflow/status/gherking/gpc-template/CI/master?label=ci&style=flat-square) ![Docs](https://img.shields.io/github/workflow/status/gherking/gpc-template/Docs/master?label=docs&style=flat-square)
+# gpc-test-data
+
+![Downloads](https://img.shields.io/npm/dw/gpc-test-data?style=flat-square) ![Version@npm](https://img.shields.io/npm/v/gpc-test-data?label=version%40npm&style=flat-square) ![Version@git](https://img.shields.io/github/package-json/v/gherking/gpc-test-data/master?label=version%40git&style=flat-square) ![CI](https://img.shields.io/github/workflow/status/gherking/gpc-test-data/CI/master?label=ci&style=flat-square) ![Docs](https://img.shields.io/github/workflow/status/gherking/gpc-test-data/Docs/master?label=docs&style=flat-square)
 
 This repository is a template to create precompilers for GherKing.
 
@@ -9,7 +11,7 @@ This repository is a template to create precompilers for GherKing.
 ```javascript
 'use strict';
 const compiler = require('gherking');
-const { default: Template } = require('gpc-template');
+const { default: Template } = require('gpc-test-data');
 
 let ast = await compiler.load('./features/src/login.feature');
 ast = compiler.process(
@@ -26,7 +28,7 @@ await compiler.save('./features/dist/login.feature', ast, {
 ```typescript
 'use strict';
 import {load, process, save} from "gherking";
-import Template from "gpc-template";
+import Template from "gpc-test-data";
 
 let ast = await load("./features/src/login.feature");
 ast = process(
@@ -42,10 +44,10 @@ await save('./features/dist/login.feature', ast, {
 
 ## Other
 
-This package uses [debug](https://www.npmjs.com/package/debug) for logging, use `gpc:template` :
+This package uses [debug](https://www.npmjs.com/package/debug) for logging, use `gpc:test-data` :
 
 ```shell
-DEBUG=gpc:template* gherking ...
+DEBUG=gpc:test-data* gherking ...
 ```
 
-For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gpc-template/).
+For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gpc-test-data/).

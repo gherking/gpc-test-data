@@ -1,7 +1,7 @@
 {
-  "name": "gpc-template",
+  "name": "gpc-test-data",
   "version": "0.0.1",
-  "description": "This repository is a template to create precompilers for GherKing.",
+  "description": "This precompiler inserts external test data as example rows.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gherking/gpc-template.git"
+    "url": "git+https://github.com/gherking/gpc-test-data.git"
   },
   "keywords": [
     "gherkin",
@@ -28,9 +28,9 @@
   "author": "GherKing (https://github.com/gherking)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gherking/gpc-template/issues"
+    "url": "https://github.com/gherking/gpc-test-data/issues"
   },
-  "homepage": "https://github.com/gherking/gpc-template#readme",
+  "homepage": "https://github.com/gherking/gpc-test-data#readme",
   "files": [
     "**/*.js",
     "**/*.d.ts",
