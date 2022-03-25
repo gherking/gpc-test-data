@@ -49,6 +49,10 @@ In the feature file, for each Examples, one of the following tags can be set:
 * `@load_xls(path)` to load the data from an XLS/XLSX file, from the first sheet
 * `@load_xls(path,sheet)` to load the data from an XLS/XLSX file, from the given sheet
 
+For each tag, the path must be either a relative (from `cwd`) or an absolute path to the file, including the file name and extension.
+
+## Formats
+
 There are some restrictions on the various data formats:
 
 * For JSON, the content of the JSON file should be an array of objects, where the key of the object properties will be mapped to the examples columns.
