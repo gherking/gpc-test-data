@@ -1,0 +1,32 @@
+[
+  {
+    "number": 1,
+    "string": "one json",
+    "boolean": "TRUE",
+    "date": "2022.03.25."
+  },
+  {
+    "number": 2,
+    "string": "two json",
+    "boolean": "FALSE",
+    "date": "2022.03.26."
+  },
+  {
+    "number": 3,
+    "string": "three json",
+    "boolean": "TRUE",
+    "date": "2022.03.27."
+  },
+  {
+    "number": 4,
+    "string": "four json",
+    "boolean": "FALSE",
+    "date": "2022.03.28."
+  },
+  {
+    "number": 5,
+    "string": "five json",
+    "boolean": "TRUE",
+    "date": "2022.03.29."
+  }
+]

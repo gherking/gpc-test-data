@@ -1,6 +1,6 @@
 import { load, process } from "gherking";
 import { Document, pruneID } from "gherkin-ast";
-import TestData, { Config } from "../src";
+import TestData, { TestDataConfig } from "../src";
 
 const cleanLocationInfo = (ast: Document): void => {
   delete ast.sourceFile;
@@ -15,7 +15,7 @@ const loadTestFeatureFile = async (folder: "input" | "expected", file: string): 
   return ast[0];
 }
 
-const checkConfig = async (testCase: string, config: Partial<Config>): Promise<void> => {
+const checkConfig = async (testCase: string, config: Partial<TestDataConfig>): Promise<void> => {
   const input = await loadTestFeatureFile("input", `${testCase}.feature`);
   const expected = await loadTestFeatureFile("expected", `${testCase}.feature`);
   const actual = process(input, new TestData(config));

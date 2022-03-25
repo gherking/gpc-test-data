@@ -1,0 +1,6 @@
+﻿number,string,boolean,date
+1,one csv,TRUE,2022.03.25.
+2,two csv,FALSE,2022.03.26.
+3,three csv,TRUE,2022.03.27.
+4,four csv,FALSE,2022.03.28.
+5,five csv,TRUE,2022.03.29.
