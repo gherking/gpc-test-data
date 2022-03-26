@@ -1,6 +1,6 @@
 {
   "name": "gpc-test-data",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "This precompiler inserts external test data as example rows.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -57,9 +57,13 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "csv-parse": "^5.0.4",
+    "csv-string": "^4.1.0",
     "debug": "^4.3.1",
+    "detect-csv": "^1.1.0",
     "gherkin-ast": "^3.3.0",
-    "gherking": "^2.1.0"
+    "gherking": "^2.1.0",
+    "xlsx": "^0.18.5"
   },
   "jest": {
     "reporters": [
@@ -84,7 +88,8 @@
     ],
     "moduleFileExtensions": [
       "ts",
-      "js"
+      "js",
+      "cjs"
     ],
     "coverageThreshold": {
       "global": {
