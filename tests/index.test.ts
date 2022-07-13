@@ -5,9 +5,13 @@ import * as json from "../src/json";
 import { AmbiguousTagsError, EmptyDataError, UnknownFormatError } from "../src/error";
 
 const cleanLocationInfo = (ast: Document): void => {
+  // @ts-ignore
   delete ast.sourceFile;
+  // @ts-ignore
   delete ast.targetFile;
+  // @ts-ignore
   delete ast.sourceFolder;
+  // @ts-ignore
   delete ast.targetFolder;
 }
 
@@ -20,10 +24,12 @@ const loadTestFeatureFile = async (folder: "input" | "expected", file: string): 
 const checkConfig = async (testCase: string, config: Partial<TestDataConfig>): Promise<void> => {
   const input = await loadTestFeatureFile("input", `${testCase}.feature`);
   const expected = await loadTestFeatureFile("expected", `${testCase}.feature`);
-  const actual = process(input, new TestData(config));
+  const actual = await process(input, new TestData(config));
 
   cleanLocationInfo(actual[0]);
+  // @ts-ignore
   delete expected.uri;
+  // @ts-ignore
   delete actual[0].uri;
 
   pruneID(actual);
@@ -64,7 +70,7 @@ describe("Test Data", () => {
       json.tag('other'),
     ];
 
-    expect(() => testData.onExamples(examples)).toThrowError(AmbiguousTagsError);
+    expect(() => testData.onExamples(examples)).rejects.toThrowError(AmbiguousTagsError);
   });
 
   test("should fail if data is empty", () => {
@@ -74,11 +80,11 @@ describe("Test Data", () => {
       json.tag('tests/data/raw/empty.json'),
     ];
 
-    expect(() => testData.onExamples(examples)).toThrowError(EmptyDataError);
+    expect(() => testData.onExamples(examples)).rejects.toThrowError(EmptyDataError);
   });
 
   test("should fail if unknow format tag is found", () => {
     const testData = new TestData();
-    expect(() => testData.loadData(tag('load_other', 'file'))).toThrowError(UnknownFormatError);
+    expect(() => testData.loadData(tag('load_other', 'file'))).rejects.toThrowError(UnknownFormatError);
   })
 });

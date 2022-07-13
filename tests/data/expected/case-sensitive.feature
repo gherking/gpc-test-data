@@ -37,3 +37,11 @@ Feature: Test
       | 3      | three xlsx | TRUE    | 2022.03.27. |
       | 4      | four xlsx  | FALSE   | 2022.03.28. |
       | 5      | five xlsx  | TRUE    | 2022.03.29. |
+
+    Examples: HTTP
+      | number | string    | boolean | date        |
+      | 1      | one json  | TRUE    | 42          |
+      | 2      | 42        | FALSE   | 2022.03.26. |
+      | 3      | 42        | TRUE    | 2022.03.27. |
+      | 42     | four json | FALSE   | 2022.03.28. |
+      | 5      | five json | 42      | 2022.03.29. |
