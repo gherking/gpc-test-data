@@ -1,5 +1,5 @@
 import { PreCompiler } from "gherking";
-import { Examples, TableCell, TableRow, Tag } from "gherkin-ast";
+import { Comment, Examples, TableCell, TableRow, Tag } from "gherkin-ast";
 import * as json from "./json";
 import * as csv from "./csv";
 import * as xls from "./xls";
@@ -13,6 +13,7 @@ export interface TestDataConfig {
   defaultValue?: string | number;
   appendData?: boolean;
   ignoreKeyCase?: boolean;
+  addSourceComment?: boolean;
 }
 
 const DEFAULT_CONFIG: TestDataConfig = {
@@ -20,6 +21,7 @@ const DEFAULT_CONFIG: TestDataConfig = {
   defaultValue: "",
   appendData: true,
   ignoreKeyCase: true,
+  addSourceComment: false,
 };
 
 export default class TestData implements PreCompiler {
@@ -47,6 +49,22 @@ export default class TestData implements PreCompiler {
       preparedData.push(prepared);
     }
     return preparedData;
+  }
+
+  public getCommentText(tag: Tag): string {
+    if (http.isTag(tag)) {
+      return http.getCommentText(tag);
+    }
+    if (json.isTag(tag)) {
+      return json.getCommentText(tag);
+    }
+    if (csv.isTag(tag)) {
+      return csv.getCommentText(tag);
+    }
+    if (xls.isTag(tag)) {
+      return xls.getCommentText(tag);
+    }
+    throw new UnknownFormatError(`Unknow data format load tag: ${tag.toString()}!`);
   }
 
   public async loadData(tag: Tag): Promise<unknown[]> {
@@ -87,9 +105,16 @@ export default class TestData implements PreCompiler {
       throw new AmbiguousTagsError(`Ambiguous tags on the example, only one allowed: ${loadTags.join()}!`);
     }
     if (loadTags.length) {
-      const rawData = await this.loadData(loadTags[0]);
+      const tag = loadTags[0];
+      const rawData = await this.loadData(tag);
       if (!rawData.length) {
-        throw new EmptyDataError(`Data is empty: ${loadTags[0]}!`);
+        throw new EmptyDataError(`Data is empty: ${tag}!`);
+      }
+      if (this.config.addSourceComment) {
+        e.precedingComment = new Comment(
+          (e.precedingComment ? e.precedingComment.text + '\n' : '') +
+          `# gpc-test-data: ${this.getCommentText(tag)}`
+        );
       }
       const preparedData = this.prepareData(rawData);
       const headers = e.header.cells.map(cell => {

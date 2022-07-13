@@ -5,6 +5,7 @@ import { FileNotFoundError, FileTypeError } from "./error";
 export const TAG = 'load_json';
 export const tag = (path: string): Tag => new Tag(TAG, path);
 export const isTag = (tag: Tag): boolean => !!tag && tag.name.toLowerCase() === TAG;
+export const getCommentText = (tag: Tag): string => `JSON data loaded from ${tag.value}`;
 
 export function load(path: string): unknown[] {
   if (!/\.json$/i.test(path)) {

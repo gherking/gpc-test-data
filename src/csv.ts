@@ -7,6 +7,7 @@ import { detect } from "csv-string";
 export const TAG = 'load_csv';
 export const tag = (path: string): Tag => new Tag(TAG, path);
 export const isTag = (tag: Tag): boolean => !!tag && tag.name.toLowerCase() === TAG;
+export const getCommentText = (tag: Tag): string => `CSV data loaded from ${tag.value}`;
 
 export function loadString(csvString: string): unknown[] {
   return parse(csvString, {

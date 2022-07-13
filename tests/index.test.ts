@@ -52,6 +52,7 @@ describe("Test Data", () => {
     await checkConfig("case-sensitive", {
       defaultValue: 42,
       ignoreKeyCase: false,
+      addSourceComment: true,
     });
   });
 

@@ -6,6 +6,7 @@ Feature: Test
     And step <date>
 
     @load_json(tests/data/raw/raw.json)
+    # Some existing comment
     Examples: JSON
       | number | string    | boolean | date        |
       | 0      | zero json | FALSE   | 2022.03.24. |

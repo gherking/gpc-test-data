@@ -10,6 +10,12 @@ export const tag = (path: string, sheet?: string | number): Tag => new Tag(
   typeof sheet === "undefined" ? path : `${path},${sheet}`
 );
 export const isTag = (tag: Tag): boolean => !!tag && tag.name.toLowerCase() === TAG;
+export const getCommentText = (tag: Tag): string => {
+  const [path, sheet] = tag.value.split(",");
+  const comment = [`XLS data loaded from ${path}`];
+  comment.push(typeof sheet === "undefined" ? "from the first sheet" : `from the '${sheet}' sheet`);
+  return comment.join(", ");
+};
 
 export function load(path: string, sheet?: string | number): unknown[] {
   if (!/\.xlsx?$/i.test(path)) {

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Added `load_http`
+- Added **Load comments**
+
 ## 1.0.0 - 2022-03-26
 
 Added implementation of the precompiler
