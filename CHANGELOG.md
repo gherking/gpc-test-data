@@ -3,7 +3,7 @@
 ## 1.1.0
 
 - Added `load_http`
-- Added **Load comments**
+- Added **source comments**
 
 ## 1.0.0 - 2022-03-26
 

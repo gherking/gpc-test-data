@@ -65,12 +65,13 @@ There are some restrictions on the various data formats:
 
 The precompiler supports the following configuration options to be set:
 
-|     Option      |       Type       | Description                                                                                           | Default |
-| :-------------: | :--------------: | :---------------------------------------------------------------------------------------------------- | :------ |
-|    `keepTag`    |    `boolean`     | Whether the load-tags should be kept or removed.                                                      | `false` |
-| `defaultValue`  | `string\|number` | The default value to be added to the table, if a column/value is not found.                           | `""`    |
-|  `appendData`   |    `boolean`     | Whether the loaded data should be appended to the existing rows of the examples table or overwritten. | `true`  |
-| `ignoreKeyCase` |    `boolean`     | Whether the casing of the example columns and data columns should be ignored.                         | `true`  |
+|       Option       |       Type       | Description                                                                                           | Default |
+| :----------------: | :--------------: | :---------------------------------------------------------------------------------------------------- | :------ |
+|     `keepTag`      |    `boolean`     | Whether the load-tags should be kept or removed.                                                      | `false` |
+|   `defaultValue`   | `string\|number` | The default value to be added to the table, if a column/value is not found.                           | `""`    |
+|    `appendData`    |    `boolean`     | Whether the loaded data should be appended to the existing rows of the examples table or overwritten. | `true`  |
+|  `ignoreKeyCase`   |    `boolean`     | Whether the casing of the example columns and data columns should be ignored.                         | `true`  |
+| `addSourceComment` |    `boolean`     | Whether a comment should be added to the example, indicating the source and the data type.            | `false` |
 
 ## Other
 
