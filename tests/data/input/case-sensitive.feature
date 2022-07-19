@@ -21,3 +21,7 @@ Feature: Test
     @load_xls(tests/data/raw/raw.xlsx,data)
     Examples: XLSX
       | number | string | boolean | date |
+
+    @load_http(https://gherking.github.io/test_data/raw.json)
+    Examples: HTTP
+      | number | string | boolean | date |

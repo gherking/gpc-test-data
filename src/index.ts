@@ -3,11 +3,11 @@ import { Examples, TableCell, TableRow, Tag } from "gherkin-ast";
 import * as json from "./json";
 import * as csv from "./csv";
 import * as xls from "./xls";
+import * as http from "./http";
 import { AmbiguousTagsError, EmptyDataError, UnknownFormatError } from "./error";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require("debug")("gpc:test-data");
 
-// TODO: define your configuration option, if necessary
 export interface TestDataConfig {
   keepTag?: boolean;
   defaultValue?: string | number;
@@ -49,7 +49,10 @@ export default class TestData implements PreCompiler {
     return preparedData;
   }
 
-  public loadData(tag: Tag): unknown[] {
+  public async loadData(tag: Tag): Promise<unknown[]> {
+    if (http.isTag(tag)) {
+      return await http.load(tag.value);
+    }
     if (json.isTag(tag)) {
       return json.load(tag.value);
     }
@@ -71,20 +74,20 @@ export default class TestData implements PreCompiler {
   }
 
   public isLoadTag(tag: Tag): boolean {
-    return json.isTag(tag) || csv.isTag(tag) || xls.isTag(tag);
+    return json.isTag(tag) || csv.isTag(tag) || xls.isTag(tag) || http.isTag(tag);
   }
 
   public postTag(tag: Tag): boolean {
     return this.config.keepTag || !this.isLoadTag(tag);
   }
 
-  public onExamples(e: Examples): void {
+  public async onExamples(e: Examples): Promise<void> {
     const loadTags = this.findTags(e.tags);
     if (loadTags.length > 1) {
       throw new AmbiguousTagsError(`Ambiguous tags on the example, only one allowed: ${loadTags.join()}!`);
     }
     if (loadTags.length) {
-      const rawData = this.loadData(loadTags[0]);
+      const rawData = await this.loadData(loadTags[0]);
       if (!rawData.length) {
         throw new EmptyDataError(`Data is empty: ${loadTags[0]}!`);
       }
