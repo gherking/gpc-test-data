@@ -14,4 +14,4 @@ jobs:
   call_npm_beta_release:
     uses: szikszail/workflows/.github/workflows/npm-beta-release.yml@main
     secrets:
-      envPAT: ${{ secrets.npm_token }}
+      npm_token: ${{ secrets.npm_token }}
