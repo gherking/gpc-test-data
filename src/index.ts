@@ -22,6 +22,11 @@ const DEFAULT_CONFIG: TestDataConfig = {
   ignoreKeyCase: true,
 };
 
+export type DataType = string | number | boolean;
+export interface Data {
+  [key: string]: DataType;
+}
+
 export default class TestData implements PreCompiler {
   private config: TestDataConfig;
 
@@ -34,13 +39,13 @@ export default class TestData implements PreCompiler {
     };
   }
 
-  public prepareData(data: unknown[]): any[] {
+  public prepareData(data: Data[]): Data[] {
     if (!this.config.ignoreKeyCase) {
       return data;
     }
-    const preparedData: unknown[] = [];
-    for (const entry of data as any[]) {
-      const prepared: any = {};
+    const preparedData: Data[] = [];
+    for (const entry of data) {
+      const prepared: Data = {};
       for (const key in entry) {
         prepared[key.toLowerCase()] = entry[key];
       }
@@ -49,19 +54,24 @@ export default class TestData implements PreCompiler {
     return preparedData;
   }
 
-  public async loadData(tag: Tag): Promise<unknown[]> {
+  public async loadData(tag: Tag): Promise<Data[]> {
+    debug("loadData(tag: %s)", tag);
     if (http.isTag(tag)) {
-      return await http.load(tag.value);
+      debug("loadData - HTTP: %s", tag.value);
+      return await http.load(tag.value) as Data[];
     }
     if (json.isTag(tag)) {
-      return json.load(tag.value);
+      debug("loadData - JSON: %s", tag.value);
+      return json.load(tag.value) as Data[];
     }
     if (csv.isTag(tag)) {
-      return csv.load(tag.value);
+      debug("loadData - CSV: %s", tag.value);
+      return csv.load(tag.value) as Data[];
     }
     if (xls.isTag(tag)) {
+      debug("loadData - JSON: %s", tag.value);
       const [path, sheet] = tag.value.split(",");
-      return xls.load(path, sheet);
+      return xls.load(path, sheet) as Data[];
     }
     throw new UnknownFormatError(`Unknow data format load tag: ${tag.toString()}!`);
   }
