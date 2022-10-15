@@ -1,9 +1,8 @@
 import { readFileSync, existsSync } from "fs";
 import { Tag } from "gherkin-ast";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { parse } = require("csv-parse/dist/cjs/sync");
 import { FileNotFoundError, FileTypeError } from "./error";
 import { detect } from "csv-string";
+import { parse } from "csv-parse/sync";
 
 export const TAG = 'load_csv';
 export const tag = (path: string): Tag => new Tag(TAG, path);
