@@ -12,8 +12,7 @@
     "clean": "rimraf ./dist ./docs ./reports ./coverage",
     "test": "cross-env JEST_JUNIT_OUTPUT_DIR=./reports jest --coverage",
     "lint": "eslint . --ext .ts --fix",
-    "compile": "tsc && npm run lint",
-    "prepare": "husky install"
+    "compile": "tsc && npm run lint"
   },
   "repository": {
     "type": "git",
