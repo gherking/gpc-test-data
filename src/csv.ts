@@ -1,8 +1,8 @@
 import { readFileSync, existsSync } from "fs";
 import { Tag } from "gherkin-ast";
-import { parse } from "csv-parse/sync";
 import { FileNotFoundError, FileTypeError } from "./error";
 import { detect } from "csv-string";
+import { parse } from "csv-parse/sync";
 
 export const TAG = 'load_csv';
 export const tag = (path: string): Tag => new Tag(TAG, path);

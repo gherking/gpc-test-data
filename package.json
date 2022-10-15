@@ -12,7 +12,8 @@
     "clean": "rimraf ./dist ./docs ./reports ./coverage",
     "test": "cross-env JEST_JUNIT_OUTPUT_DIR=./reports jest --coverage",
     "lint": "eslint . --ext .ts --fix",
-    "compile": "tsc && npm run lint"
+    "compile": "tsc && npm run lint",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -37,33 +38,32 @@
     "**/*.js.map"
   ],
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
-    "@types/jest": "^28.1.5",
-    "@types/node": "^18.0.3",
-    "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6",
+    "@types/jest": "^29.1.2",
+    "@types/node": "^18.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.19.0",
-    "husky": "^7.0.4",
-    "jest": "^28.1.3",
-    "jest-junit": "^14.0.0",
+    "eslint": "^8.25.0",
+    "husky": "^8.0.1",
+    "jest": "^29.2.0",
+    "jest-junit": "^14.0.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^28.0.5",
-    "typedoc": "^0.23.7",
-    "typescript": "^4.7.4"
+    "ts-jest": "^29.0.3",
+    "typedoc": "^0.23.16",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
-    "csv-parse": "^5.3.0",
-    "csv-string": "^4.1.0",
+    "csv-parse": "^5.3.1",
+    "csv-string": "^4.1.1",
     "debug": "^4.3.4",
-    "detect-csv": "^1.1.0",
     "gherkin-ast": "^3.3.0",
     "gherking": "2.2.0-beta.24",
-    "axios": "^0.27.2",
+    "axios": "^1.1.2",
     "xlsx": "^0.18.5"
   },
   "resolutions": {
