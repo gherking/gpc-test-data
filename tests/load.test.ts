@@ -1,6 +1,7 @@
 import * as json from "../src/json";
 import * as csv from "../src/csv";
 import * as xls from "../src/xls";
+import * as http from "../src/http";
 import { FileNotFoundError, FileTypeError, SheetNotFoundError } from "../src/error";
 
 describe("Data Loading", () => {
@@ -29,6 +30,16 @@ describe("Data Loading", () => {
 
     test('should fail if file cannot be found', () => {
       expect(() => csv.load('tests/data/raw/other.csv')).toThrowError(FileNotFoundError);
+    });
+  });
+
+  describe("HTTP", () => {
+    test('should have function to create load tag', () => {
+      expect(http.tag('url').toString()).toBe('@load_http(url)');
+    });
+
+    test('should fail if resource not found', () => {
+      expect(() => http.load('http://there.is.no.url/data.json')).rejects.toThrowError('Error during loading URL (http://there.is.no.url/data.json):');
     });
   });
 

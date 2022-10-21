@@ -6,6 +6,7 @@ Feature: Test
     And step <date>
 
     @load_json(tests/data/raw/raw.json)
+    # Some existing comment
     Examples: JSON
       | number | string    | boolean | date        |
       | 0      | zero json | FALSE   | 2022.03.24. |
@@ -20,4 +21,8 @@ Feature: Test
 
     @load_xls(tests/data/raw/raw.xlsx,data)
     Examples: XLSX
+      | number | string | boolean | date |
+
+    @load_http(https://gherking.github.io/test_data/raw.json)
+    Examples: HTTP
       | number | string | boolean | date |

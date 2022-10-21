@@ -1,8 +1,9 @@
 import { PreCompiler } from "gherking";
-import { Examples, TableCell, TableRow, Tag } from "gherkin-ast";
+import { Comment, Examples, TableCell, TableRow, Tag } from "gherkin-ast";
 import * as json from "./json";
 import * as csv from "./csv";
 import * as xls from "./xls";
+import * as http from "./http";
 import { AmbiguousTagsError, EmptyDataError, UnknownFormatError } from "./error";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require("debug")("gpc:test-data");
@@ -12,6 +13,7 @@ export interface TestDataConfig {
   defaultValue?: string | number;
   appendData?: boolean;
   ignoreKeyCase?: boolean;
+  addSourceComment?: boolean;
 }
 
 const DEFAULT_CONFIG: TestDataConfig = {
@@ -19,6 +21,7 @@ const DEFAULT_CONFIG: TestDataConfig = {
   defaultValue: "",
   appendData: true,
   ignoreKeyCase: true,
+  addSourceComment: false,
 };
 
 export type DataType = string | number | boolean;
@@ -53,8 +56,28 @@ export default class TestData implements PreCompiler {
     return preparedData;
   }
 
-  public loadData(tag: Tag): Data[] {
+  public getCommentText(tag: Tag): string {
+    if (http.isTag(tag)) {
+      return http.getCommentText(tag);
+    }
+    if (json.isTag(tag)) {
+      return json.getCommentText(tag);
+    }
+    if (csv.isTag(tag)) {
+      return csv.getCommentText(tag);
+    }
+    if (xls.isTag(tag)) {
+      return xls.getCommentText(tag);
+    }
+    throw new UnknownFormatError(`Unknow data format load tag: ${tag.toString()}!`);
+  }
+
+  public async loadData(tag: Tag): Promise<Data[]> {
     debug("loadData(tag: %s)", tag);
+    if (http.isTag(tag)) {
+      debug("loadData - HTTP: %s", tag.value);
+      return await http.load(tag.value) as Data[];
+    }
     if (json.isTag(tag)) {
       debug("loadData - JSON: %s", tag.value);
       return json.load(tag.value) as Data[];
@@ -79,22 +102,29 @@ export default class TestData implements PreCompiler {
   }
 
   public isLoadTag(tag: Tag): boolean {
-    return json.isTag(tag) || csv.isTag(tag) || xls.isTag(tag);
+    return json.isTag(tag) || csv.isTag(tag) || xls.isTag(tag) || http.isTag(tag);
   }
 
   public postTag(tag: Tag): boolean {
     return this.config.keepTag || !this.isLoadTag(tag);
   }
 
-  public onExamples(e: Examples): void {
+  public async onExamples(e: Examples): Promise<void> {
     const loadTags = this.findTags(e.tags);
     if (loadTags.length > 1) {
       throw new AmbiguousTagsError(`Ambiguous tags on the example, only one allowed: ${loadTags.join()}!`);
     }
     if (loadTags.length) {
-      const rawData = this.loadData(loadTags[0]);
+      const tag = loadTags[0];
+      const rawData = await this.loadData(tag);
       if (!rawData.length) {
-        throw new EmptyDataError(`Data is empty: ${loadTags[0]}!`);
+        throw new EmptyDataError(`Data is empty: ${tag}!`);
+      }
+      if (this.config.addSourceComment) {
+        e.precedingComment = new Comment(
+          (e.precedingComment ? e.precedingComment.text + '\n' : '') +
+          `# gpc-test-data: ${this.getCommentText(tag)}`
+        );
       }
       const preparedData = this.prepareData(rawData);
       const headers = e.header.cells.map(cell => {
