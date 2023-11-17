@@ -1,6 +1,6 @@
 {
   "name": "gpc-test-data",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "This precompiler inserts external test data as example rows.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -26,6 +26,9 @@
     "file"
   ],
   "author": "GherKing (https://github.com/gherking)",
+  "contributors": [
+    "Peter Toth <taughty@gmail.com> (https://github.com/taughty)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gherking/gpc-test-data/issues"

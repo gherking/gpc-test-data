@@ -40,6 +40,12 @@ const checkConfig = async (testCase: string, config: Partial<TestDataConfig>): P
 }
 
 describe("Test Data", () => {
+  test("should allow empty test data", async () => {
+    await checkConfig("allow-empty-data", {
+      allowEmptyData: true,
+    });
+  });
+
   test("should load various type of test data ignoring key case", async () => {
     await checkConfig("ignore-case", {
       defaultValue: 42,
@@ -74,7 +80,7 @@ describe("Test Data", () => {
     expect(() => testData.onExamples(examples)).rejects.toThrowError(AmbiguousTagsError);
   });
 
-  test("should fail if data is empty", () => {
+  test("should fail if data is empty and empty data is not allowed", () => {
     const examples = new Examples('Examples', 'Name');
     const testData = new TestData();
     examples.tags = [
@@ -84,7 +90,7 @@ describe("Test Data", () => {
     expect(() => testData.onExamples(examples)).rejects.toThrowError(EmptyDataError);
   });
 
-  test("should fail if unknow format tag is found", () => {
+  test("should fail if unknown format tag is found", () => {
     const testData = new TestData();
     expect(() => testData.loadData(tag('load_other', 'file'))).rejects.toThrowError(UnknownFormatError);
   })

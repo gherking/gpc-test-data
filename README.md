@@ -72,6 +72,7 @@ The precompiler supports the following configuration options to be set:
 |    `appendData`    |    `boolean`     | Whether the loaded data should be appended to the existing rows of the examples table or overwritten. | `true`  |
 |  `ignoreKeyCase`   |    `boolean`     | Whether the casing of the example columns and data columns should be ignored.                         | `true`  |
 | `addSourceComment` |    `boolean`     | Whether a comment should be added to the example, indicating the source and the data type.            | `false` |
+|  `allowEmptyData`  |    `boolean`     | Whether empty data files are allowed to be loaded, or error should be thrown.                         | `false` |
 
 ## Other
 
