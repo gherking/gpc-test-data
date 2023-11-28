@@ -1,6 +1,6 @@
 # gpc-test-data
 
-![Downloads](https://img.shields.io/npm/dw/gpc-test-data?style=flat-square) ![Version@npm](https://img.shields.io/npm/v/gpc-test-data?label=version%40npm&style=flat-square) ![Version@git](https://img.shields.io/github/package-json/v/gherking/gpc-test-data/master?label=version%40git&style=flat-square) ![CI](https://img.shields.io/github/workflow/status/gherking/gpc-test-data/CI/master?label=ci&style=flat-square) ![Docs](https://img.shields.io/github/workflow/status/gherking/gpc-test-data/Docs/master?label=docs&style=flat-square)
+![Downloads](https://img.shields.io/npm/dw/gpc-test-data?style=flat-square) ![Version@npm](https://img.shields.io/npm/v/gpc-test-data?label=version%40npm&style=flat-square) ![Version@git](https://img.shields.io/github/package-json/v/gherking/gpc-test-data/master?label=version%40git&style=flat-square) ![CI](https://img.shields.io/github/actions/workflow/status/gherking/gpc-test-data/ci.yml?branch=master&label=ci&style=flat-square) ![Docs](https://img.shields.io/github/actions/workflow/status/gherking/gpc-test-data/docs.yml?branch=master&label=docs&style=flat-square)
 
 This precompiler can load external data (JSON, CSV, or XLS/XLSX) into the examples table.
 
