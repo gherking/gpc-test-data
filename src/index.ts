@@ -14,6 +14,7 @@ export interface TestDataConfig {
   appendData?: boolean;
   ignoreKeyCase?: boolean;
   addSourceComment?: boolean;
+  allowEmptyData?: boolean;
 }
 
 const DEFAULT_CONFIG: TestDataConfig = {
@@ -22,6 +23,7 @@ const DEFAULT_CONFIG: TestDataConfig = {
   appendData: true,
   ignoreKeyCase: true,
   addSourceComment: false,
+  allowEmptyData: false,
 };
 
 export type DataType = string | number | boolean;
@@ -117,7 +119,7 @@ export default class TestData implements PreCompiler {
     if (loadTags.length) {
       const tag = loadTags[0];
       const rawData = await this.loadData(tag);
-      if (!rawData.length) {
+      if (!this.config.allowEmptyData && !rawData.length) {
         throw new EmptyDataError(`Data is empty: ${tag}!`);
       }
       if (this.config.addSourceComment) {
